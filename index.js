@@ -1,6 +1,6 @@
 
 const gracias = "Muchas Gracias ";
-const elPrecio = " Tu viaje tendra un costo de $ "
+const elPrecio = " Tu viaje tendra un costo de $ ";
 const whatsapp = " Pesos. Por favor dale aceptar para ser redirecionado a nuestro Whatsapp y poder concretar tu solicitud.";
 const nombreUsuario = prompt("¡Hola! Estamos contentos de que te comuniques con nosotros, ¿Cual es tu nombre?")
 
@@ -130,8 +130,18 @@ while (!salir) {
                         carrito.splice(index, 1);
                     }
                 } else if (opcion === "3") {
+
+                    // construir el mensaje de WhatsApp
+                    const mensaje = "Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + nombreUsuario + " y quiero hacer una reserva para los siguientes viajes: "+carrito.map((item, index) => index + ") " + item.nombre + " - $" + item.precio.toFixed(2)).join("\n") +
+                    "\n por un total de: $" + total.toFixed(2)+" pesos";
+                    // construir la URL del mensaje de WhatsApp
+                    const whatsappURL = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent(mensaje);
+
+                    // mostrar un mensaje de agradecimiento y redirigir a la página de WhatsApp
+
                     alert(gracias + nombreUsuario + elPrecio + total.toFixed(2));
-                    window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es y quiero hacer una reserva para un viaje de ");
+                    window.location.href = whatsappURL;
+
                 } else {
                     alert("Opción inválida. Por favor seleccione una opción válida.");
                     break;
