@@ -1,5 +1,5 @@
 
-const gracias = "Muchas Gracias ";
+const gracias = "Muchas Gracias! ";
 const elPrecio = " Tu viaje tendra un costo de $ ";
 const whatsapp = " Pesos. Por favor dale aceptar para ser redirecionado a nuestro Whatsapp y poder concretar tu solicitud.";
 const nombreUsuario = prompt("¡Hola! Estamos contentos de que te comuniques con nosotros, ¿Cual es tu nombre?")
@@ -7,7 +7,7 @@ const nombreUsuario = prompt("¡Hola! Estamos contentos de que te comuniques con
 
 let salir = false;
 
-alert(nombreUsuario + "  ¡Hola!👋Gracias por contactar Wolves Logística y Mensajería. Nuestro horario de atención es de 9:00 am a 6:00 pm, de lunes a viernes🕑")
+alert(`¡Hola!👋 ${nombreUsuario} Gracias por contactar Wolves Logística y Mensajería. Nuestro horario de atención es de 9:00 am a 6:00 pm, de lunes a viernes🕑`)
 
 while (!salir) {
 
@@ -38,31 +38,24 @@ while (!salir) {
     else if (servicioSolicitado === "4") {
         let resultadoSolicitud = prompt("¡Cotiza y solicita tu viaje! \n\n1) 📦 Para envíos particulares \n2) 🚛 Para envíos programados \n3) 🌎 Para envíos programados de diferentes zonas \n\n")
         if (resultadoSolicitud === "1") {
-            let kilometraje = prompt("¿Cuantos Kilometros son el recorrido del paquete?")
+            let kilometraje = parseInt(prompt("¿Cuantos Kilometros son el recorrido del paquete?"))
             if (kilometraje >= 0) {
                 alert(gracias + nombreUsuario + elPrecio + kilometraje * 100 + whatsapp);
 
-                // Mostrar prompt con opciones de volver o ir al WhatsApp
-                const opcion1 = prompt('Elija una opción:\n1. Ver cotizacion\n2. Solicitar el servicio');
-
-                // Mientras el usuario no elija una opción válida, mostrar el prompt de nuevo
-                while (opcion1 !== '1' && opcion !== '2') {
-                    opcion = prompt('Elija una opción:\n1. Ver cotizacion\n2. Solicitar el servicio');
-                }
-
-                // Si el usuario eligió la opción de "Volver", mostrar el mensaje de nuevo y preguntar nuevamente
-                if (opcion1 === '1') {
+                // Mostrar prompt con opciones de volver o ir al WhatsApp, volvera a pedir si ingresa una opcion no valida
+                let opcion = 0
+                do {opcion = prompt('Elija una opción:\n1. Ver cotizacion\n2. Solicitar el servicio')
+               
+                    if(opcion === '1') {
                     alert(gracias + nombreUsuario + elPrecio + kilometraje * 100 + whatsapp);
-                    const opcion = prompt('Elija una opción:\n1. Ver cotizacion\n2. Solicitar el servicio');
-
-                    while (opcion1 !== '1' && opcion !== '2') {
-                        opcion1 = prompt('Por favor, elija una opción válida:\n1. Ver cotizacion\n2. Solicitar el servicio');
+                    opcion = prompt('Elija una opción:\n1. Ver cotizacion\n2. Solicitar el servicio');
+                    
+                    }
+                    else if (opcion === '2') {
+                        window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + nombreUsuario + " y quiero hacer una reserva para " + viajesProgramados + " paquetes en Zona Sur.")
                     }
                 }
-                // Si el usuario eligió la opción de "WhatsApp", abrir un enlace con la aplicación de WhatsApp
-                if (opcion1 === '2') {
-                    window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + nombreUsuario + " y quiero hacer una reserva para " + viajesProgramados + " paquetes en Zona Sur.")
-                }
+                while (opcion !== '1' || opcion !== '2')
             }
         }
         else if (resultadoSolicitud === "2") {
