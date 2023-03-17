@@ -1,4 +1,5 @@
 
+//variables para mensajes
 const gracias = "Muchas Gracias ";
 const elPrecio = " Tu viaje tendra un costo de $ ";
 const whatsapp = " Pesos. Por favor dale aceptar para ser redirecionado a nuestro Whatsapp y poder concretar tu solicitud.";
@@ -6,15 +7,14 @@ const whatsapp = " Pesos. Por favor dale aceptar para ser redirecionado a nuestr
 // REGISTRO DE USUARIOS NUEVOS Y ACCESO 
 
 // Base de datos de usuarios
-const usersDB = [
-    { username: 'user1', password: 'pass1' },
-    { username: 'user2', password: 'pass2' }
+const usuario = [
+    { username: 'user1', password: 'pass1' },    
 ];
 
 // Función para validar si un usuario y contraseña son correctos
 function validateUser(username, password) {
     // Buscar si existe un usuario con el username y password dados
-    const user = usersDB.find(user => user.username === username && user.password === password);
+    const user = usuario.find(user => user.username === username && user.password === password);
 
     // Si existe el usuario, se devuelve true
     if (user) {
@@ -27,17 +27,10 @@ function validateUser(username, password) {
 
 // Función para registrar un nuevo usuario
 function registerUser() {
-    // Pedir al usuario que introduzca su nombre de usuario
     const username = prompt('Introduce un nombre de usuario:');
-
-    // Pedir al usuario que introduzca su contraseña
-    const password = prompt('Introduce una contraseña:');
-
-    // Agregar el nuevo usuario a la base de datos
-    usersDB.push({ username, password });
-
-    // Mostrar un mensaje al usuario para confirmar que se ha registrado correctamente
-    alert(`Usuario ${username} registrado correctamente.`);
+    const password = prompt('Crea una contraseña:');
+    usuario.push({ username, password }); 
+    alert(`Usuario ${username} ha sido registrado correctamente.`);
 }
 
 let option = 0;
@@ -92,7 +85,7 @@ while (option !== '3') {
                         if (resultadoSolicitud === "1") {
                             let kilometraje = prompt("¿Cuantos Kilometros son el recorrido del paquete?")
                             if (kilometraje >= 0) {
-                                alert(gracias + nombreUsuario + elPrecio + kilometraje * 100 + whatsapp);
+                                alert(gracias + username + elPrecio + kilometraje * 100 + whatsapp);
                 
                                 // Mostrar prompt con opciones de volver o ir al WhatsApp
                                 let opcion = 0
@@ -106,13 +99,13 @@ while (option !== '3') {
                 
                                     // Si el usuario eligió la opción de "Volver", mostrar el mensaje de nuevo y preguntar nuevamente
                                     if (opcion === '1') {
-                                        alert(gracias + nombreUsuario + elPrecio + kilometraje * 100 + whatsapp);
+                                        alert(gracias + username + elPrecio + kilometraje * 100 + whatsapp);
                                         const opcion = prompt('Elija una opción:\n1. Ver cotizacion\n2. Solicitar el servicio');
                 
                                     }
                                     // Si el usuario eligió la opción de "WhatsApp", abrir un enlace con la aplicación de WhatsApp
                                     if (opcion === '2') {
-                                        window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + nombreUsuario + " y quiero hacer una reserva para " + viajesProgramados + " paquetes en Zona Sur.")
+                                        window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + username + " y quiero hacer una reserva para " + viajesProgramados + " paquetes en Zona Sur.")
                                     }
                                 }
                                 while (opcion !== '1' && opcion !== '2') {
@@ -125,12 +118,12 @@ while (option !== '3') {
                             if (viajesProgramados > 9) {
                                 let zonas = prompt("¡Perfecto! ¿Qué zona es?\n\n1) 🏘️ Zona SUR \n2) 🏙️ CABA \n0) ⬅️ Volver atrás \n\n");
                                 if (zonas === "1") {
-                                    alert(gracias + nombreUsuario + elPrecio + viajesProgramados * 400 + whatsapp);
-                                    window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + nombreUsuario + " y quiero hacer una reserva para " + viajesProgramados + " paquetes en CABA.");
+                                    alert(gracias + username + elPrecio + viajesProgramados * 400 + whatsapp);
+                                    window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + username + " y quiero hacer una reserva para " + viajesProgramados + " paquetes en CABA.");
                                     break;
                                 } else if (zonas === "2") {
-                                    alert(gracias + nombreUsuario + elPrecio + viajesProgramados * 500 + whatsapp);
-                                    window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + nombreUsuario + " y quiero hacer una reserva para " + viajesProgramados + " paquetes en CABA.");
+                                    alert(gracias + username + elPrecio + viajesProgramados * 500 + whatsapp);
+                                    window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + username + " y quiero hacer una reserva para " + viajesProgramados + " paquetes en CABA.");
                                     break;
                                 } else if (zonas === "0") {
                 
@@ -139,8 +132,8 @@ while (option !== '3') {
                             } else if (viajesProgramados <= 9) {
                                 let kilometraje2 = prompt("Debes solicitar Viajes Particulares. ¿Cuantos Kilometros son el recorrido del paquete?");
                                 if (kilometraje2 >= 0) {
-                                    alert(gracias + nombreUsuario + elPrecio + kilometraje2 * 100 + whatsapp);
-                                    window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + nombreUsuario + " y quiero hacer una reserva para un viaje de " + kilometraje2 + " kilómetros.");
+                                    alert(gracias + username + elPrecio + kilometraje2 * 100 + whatsapp);
+                                    window.location.href = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent("Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + username + " y quiero hacer una reserva para un viaje de " + kilometraje2 + " kilómetros.");
                                     break;
                                 }
                             }
@@ -188,14 +181,14 @@ while (option !== '3') {
                                 } else if (opcion === "3") {
                 
                                     // construir el mensaje de WhatsApp
-                                    const mensaje = "Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + nombreUsuario + " y quiero hacer una reserva para los siguientes viajes: " + carrito.map((item, index) => index + ") " + item.nombre + " - $" + item.precio.toFixed(2)).join("\n") +
+                                    const mensaje = "Hola, me interesa solicitar el servicio de Wolves Logística y Mensajería. Mi nombre es " + username + " y quiero hacer una reserva para los siguientes viajes: " + carrito.map((item, index) => index + ") " + item.nombre + " - $" + item.precio.toFixed(2)).join("\n") +
                                         "\n por un total de: $" + total.toFixed(2) + " pesos";
                                     // construir la URL del mensaje de WhatsApp
                                     const whatsappURL = "https://api.whatsapp.com/send/?phone=5491123318355&text=" + encodeURIComponent(mensaje);
                 
                                     // mostrar un mensaje de agradecimiento y redirigir a la página de WhatsApp
                 
-                                    alert(gracias + nombreUsuario + elPrecio + total.toFixed(2));
+                                    alert(gracias + username + elPrecio + total.toFixed(2));
                                     window.location.href = whatsappURL;
                 
                                 } else {
@@ -207,14 +200,14 @@ while (option !== '3') {
                     }
                 }
             } else {
-                alert('Acceso denegado.');
+                alert('🔴 Acceso denegado 🔴');
             }
             break;
         case '2':
             registerUser();
             break;
         case '3':
-            alert('Adiós!');
+            alert('¡Hasta Pronto! Esperamos Verte pronto.');
             break;
         default:
             alert('Opción no válida.');
